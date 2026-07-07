@@ -1,0 +1,278 @@
+{
+    "2026-07-06": {
+        "day": "Monday",
+        "meals": {
+            "Breakfast": [
+                "KACHORI, CHUTNEY",
+                "UPMA",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "FRENCH TOAST",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "MIX -SPROUTS CURRY",
+                "ALOO METHI DRY",
+                "DAL FRY",
+                "RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "N\\A",
+                "DAHI",
+                "N\\A"
+            ],
+            "Snacks": [
+                "BHEL"
+            ],
+            "Dinner": [
+                "N\\A",
+                "CORN PALAK",
+                "DUDHI CHANA",
+                "DAL PLAIN",
+                "RICE",
+                "PHULKA",
+                "N\\A",
+                "SALAD",
+                "PICKLE",
+                "N\\A",
+                "LEMON CORINDER"
+            ]
+        }
+    },
+    "2026-07-07": {
+        "day": "Tuesday",
+        "meals": {
+            "Breakfast": [
+                "IDLI , MEDU VADA",
+                "SAMBAR, CHUTNEY",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "OMLET",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "PINDI CHOLE",
+                "KARELA DRY",
+                "MOONG DAL FRY",
+                "RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "ROASTED PAPAD",
+                "LIMBU PANI",
+                "N\\A"
+            ],
+            "Snacks": [
+                "CHANA CHAAT"
+            ],
+            "Dinner": [
+                "METHI MATTER MALAI",
+                "GRAVY SOYA MASALA",
+                "DAL",
+                "JEERA RICE",
+                "PHULKA",
+                "N\\A",
+                "SALAD",
+                "PICKLE",
+                "N\\A"
+            ]
+        }
+    },
+    "2026-07-08": {
+        "day": "Wednesday",
+        "meals": {
+            "Breakfast": [
+                "PLAIN PARATHA SABZI",
+                "POHA",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "BOILED EGG",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "KALA CHANA GRAVY",
+                "ALOO BHINDI DRY",
+                "DAL",
+                "RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "BUTTER MILK",
+                "N\\A"
+            ],
+            "Snacks": [
+                "KANDA BHAJI"
+            ],
+            "Dinner": [
+                "BUTTER CHICKEN",
+                "PANEER MASALA",
+                "DAL",
+                "RICE",
+                "PHULKA",
+                "N\\A",
+                "SALAD",
+                "PICKLE",
+                "TOMATO SOUP"
+            ]
+        }
+    },
+    "2026-07-09": {
+        "day": "Thursday",
+        "meals": {
+            "Breakfast": [
+                "UTTAPUM, SAMBAR",
+                "SEVAI UPMA,",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "BOILED EGG",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "RAJMA MASALA",
+                "ALOO GAVAR",
+                "CHANA DAL",
+                "RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "DAHI",
+                "N\\A"
+            ],
+            "Snacks": [
+                "CUP CAKE"
+            ],
+            "Dinner": [
+                "TAWA VEG",
+                "DAL FRY",
+                "JEERA RICE",
+                "LACHHA PARATHA",
+                "SALAD",
+                "PICKLE",
+                "KHEER",
+                "N A"
+            ]
+        }
+    },
+    "2026-07-10": {
+        "day": "Friday",
+        "meals": {
+            "Breakfast": [
+                "DABELI",
+                "POHA",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "BOILED EGG",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "ALOO JAIPURI",
+                "CABBAGE MATTAR",
+                "TOMATO DAL MAKHANI",
+                "RICE",
+                "PHULKA",
+                "PICKLE",
+                "VEG- RAITA",
+                "N\\A"
+            ],
+            "Snacks": [
+                "MASALA PAV"
+            ],
+            "Dinner": [
+                "EGG CURRY",
+                "PANEER MATTAR",
+                "DAL",
+                "RICE",
+                "PHULKA",
+                "N\\A",
+                "SALAD",
+                "PICKLE",
+                "N\\A",
+                "VEG SWEET CORN SOUP"
+            ]
+        }
+    },
+    "2026-07-11": {
+        "day": "Saturday",
+        "meals": {
+            "Breakfast": [
+                "SABUDANA VADA, DAHI",
+                "DHOKLA, CHUTNEY",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "FRENCH TOAST",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "WHITE MATTAR MASALA",
+                "MIX- VEG DRY",
+                "DAL TADKA",
+                "JEERA RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "KOKAM",
+                "N\\A"
+            ],
+            "Snacks": [
+                "MAGGI"
+            ],
+            "Dinner": [
+                "N\\A",
+                "CHOLE MASALA",
+                "KADHI",
+                "DAL KHICHADI",
+                "PLAIN PURI",
+                "N\\A",
+                "SALAD",
+                "LASOONI CHUTNEY",
+                "N\\A"
+            ]
+        }
+    },
+    "2026-07-12": {
+        "day": "Sunday",
+        "meals": {
+            "Breakfast": [
+                "ALOO PANEER PARATHA",
+                "DAHI, UPMA",
+                "CORNFLAKES",
+                "BBJ (BUTTER/JAM)",
+                "SEASONAL FRUIT",
+                "BOILED EGG",
+                "TEA/COFFEE/MILK"
+            ],
+            "Lunch": [
+                "BABYCORN MASHROOM",
+                "SHIMLA JEERA ALOO",
+                "DAL",
+                "RICE",
+                "PHULKA",
+                "SALAD",
+                "PICKLE",
+                "JALJIRA",
+                "N\\A"
+            ],
+            "Snacks": [
+                "CREAM ROLL"
+            ],
+            "Dinner": [
+                "CHICKAN CURRY",
+                "PANEER KADAI",
+                "DAL",
+                "RICE",
+                "PHULKA",
+                "N\\A",
+                "SALAD",
+                "PICKLE",
+                "GULABJAM"
+            ]
+        }
+    }
+}
