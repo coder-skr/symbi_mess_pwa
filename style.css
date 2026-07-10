@@ -5,33 +5,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    /* Native system fonts for a true app feel */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #F4F4F9;
-    color: #333;
+    background-color: #F8F9FA;
+    color: #2C3E50;
 }
 
 /* =========================================
    2. HEADER
    ========================================= */
 #top-bar {
-    background-color: #D32F2F; /* Symbiosis Red */
+    background: linear-gradient(135deg, #D32F2F 0%, #9A0007 100%);
     color: white;
     text-align: center;
-    padding: 16px 0;
+    padding: 18px 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
 }
 
 #top-bar h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* =========================================
@@ -42,10 +43,9 @@ body {
     overflow-x: auto;
     white-space: nowrap;
     background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
-
-    /* Hide scrollbars for a clean look */
+    padding: 12px 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -55,67 +55,92 @@ body {
 }
 
 .tab-btn {
-    flex: 0 0 auto; /* Prevents buttons from squishing */
-    padding: 12px 20px;
-    min-width: 80px;
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    margin: 0 6px;
+    min-width: 85px;
     border: none;
-    background: none;
+    background: transparent;
+    border-radius: 25px;
     font-size: 1rem;
-    font-weight: bold;
-    color: #666;
-    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    color: #7F8C8D;
     cursor: pointer;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .tab-btn small {
     display: block;
     font-size: 0.75rem;
-    font-weight: normal;
-    color: #888;
-    margin-top: 2px;
+    font-weight: 500;
+    color: #95A5A6;
+    margin-top: 4px;
+    transition: color 0.3s ease;
 }
 
 .tab-btn.active {
+    background: rgba(211, 47, 47, 0.1);
     color: #D32F2F;
-    border-bottom: 3px solid #D32F2F;
 }
 
 .tab-btn.active small {
     color: #D32F2F;
 }
 
+.tab-btn:active {
+    transform: scale(0.95);
+    background: rgba(211, 47, 47, 0.15);
+}
+
 /* =========================================
    4. MENU CONTENT & CARDS
    ========================================= */
 #menu-container {
-    padding: 20px;
-    max-width: 600px; /* Keeps it readable on tablets */
+    padding: 24px 20px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 #date-display {
     text-align: center;
-    color: #555;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    color: #7F8C8D;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
 .meal-section {
     background: white;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.02);
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+    .meal-section:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+}
+
+.meal-section:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .meal-section h3 {
     color: #D32F2F;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-    font-size: 1.1rem;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #F0F2F5;
+    padding-bottom: 8px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 
 .meal-section ul {
@@ -123,14 +148,24 @@ body {
 }
 
 .meal-section li {
-    padding: 6px 0;
-    color: #444;
+    padding: 10px 0;
+    color: #34495E;
     font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dashed #F0F2F5;
+}
+
+.meal-section li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .no-data {
     text-align: center;
-    color: #888;
+    color: #95A5A6;
     font-style: italic;
     margin-top: 40px;
+    font-weight: 500;
 }

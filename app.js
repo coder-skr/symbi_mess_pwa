@@ -15,7 +15,7 @@ async function fetchMenu() {
 // Dynamically create a button for every date found in the JSON
 function initializeTabs() {
     const tabsContainer = document.getElementById('date-tabs');
-    const availableDates = Object.keys(menuData).sort(); // Sort chronologically
+    const availableDates = Object.keys(menuData).sort();
 
     if (availableDates.length === 0) {
         tabsContainer.innerHTML = '<p style="padding:15px;">No menu data available.</p>';
@@ -24,7 +24,7 @@ function initializeTabs() {
 
     let tabsHtml = '';
     availableDates.forEach(dateKey => {
-        // Create a short display name (e.g., "Mon" and "07/06")
+        // Create a short display name
         const dayName = menuData[dateKey].day.substring(0, 3);
         const shortDate = dateKey.split('-').slice(1).join('/');
 
@@ -37,7 +37,6 @@ function initializeTabs() {
 
     tabsContainer.innerHTML = tabsHtml;
 
-    // Figure out which tab to open first (Try today, otherwise default to the first available date)
     const todayStr = getTodayString();
     if (availableDates.includes(todayStr)) {
         loadMenu(todayStr);
@@ -50,24 +49,17 @@ function initializeTabs() {
 function getTodayString() {
     const date = new Date();
 
-    // NOTE: Uncomment the line below to test it against your PDF's dates (July 2026)
-    // date.setFullYear(2026, 6, 6);
-
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
 
-// Render the selected date's menu
-// Render the selected date's menu
 function loadMenu(dateKey) {
-    // Update active button styling
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById(`btn-${dateKey}`);
     if (activeBtn) activeBtn.classList.add('active');
 
-    // Auto-scroll the tabs so the selected day is visible
     if (activeBtn) activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
 
     const displayDate = document.getElementById('date-display');
@@ -78,19 +70,15 @@ function loadMenu(dateKey) {
         displayDate.innerText = `${dailyMenu.day}, ${dateKey}`;
         let html = '';
 
-        // Define a list of garbage text we want the UI to completely ignore
         const blockList = ["NA", "N/A", "N\\A", "NIA", "-", ""];
 
         for (const [mealName, items] of Object.entries(dailyMenu.meals)) {
 
-            // 1. Filter out the junk data before rendering
             const cleanItems = items.filter(item => {
-                // Remove extra spaces and make uppercase to catch variations
                 const sanitized = item.trim().toUpperCase();
                 return sanitized.length > 0 && !blockList.includes(sanitized);
             });
 
-            // 2. Only render the meal section if there are actually valid items left
             if (cleanItems.length > 0) {
                 html += `
                     <div class="meal-section">
@@ -103,16 +91,113 @@ function loadMenu(dateKey) {
             }
         }
 
-        // If all items were filtered out (e.g., college is closed), show a fallback message
         content.innerHTML = html || '<p class="no-data">No meals listed for this day.</p>';
     }
 }
 
 fetchMenu();
 
-// Service Worker Registration for Offline Support
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js');
     });
+}
+
+/* =========================================
+   SWIPE & TRACKPAD NAVIGATION LOGIC
+   ========================================= */
+
+// 1. Target the main content area for swipes
+const swipeContainer = document.getElementById('menu-container');
+
+// 2. Variables for Mobile Touch
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+const SWIPE_THRESHOLD = 50; // Minimum pixel distance to count as a swipe
+
+// 3. Variables for Laptop Trackpad
+let isTrackpadScrolling = false;
+
+// --- MOBILE TOUCH EVENTS ---
+swipeContainer.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+swipeContainer.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+// --- LAPTOP TRACKPAD EVENTS ---
+swipeContainer.addEventListener('wheel', (e) => {
+    // A cooldown prevents one long trackpad swipe from skipping 4 days at once
+    if (isTrackpadScrolling) return;
+
+    // Ensure it's mostly a horizontal scroll, not a vertical one
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
+        if (e.deltaX > 0) {
+            changeDay('next'); // Scrolled Right -> Next Day
+        } else {
+            changeDay('prev'); // Scrolled Left -> Prev Day
+        }
+
+        // Lock the trackpad scroll for half a second
+        isTrackpadScrolling = true;
+        setTimeout(() => {
+            isTrackpadScrolling = false;
+        }, 500);
+    }
+}, { passive: true });
+
+// --- CALCULATE SWIPE DIRECTION ---
+function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+
+    // Check if the swipe was more horizontal than vertical
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        if (deltaX < 0) {
+            // Swiped Left (Finger moved Right to Left) -> Next Day
+            changeDay('next');
+        } else {
+            // Swiped Right (Finger moved Left to Right) -> Previous Day
+            changeDay('prev');
+        }
+    }
+}
+
+// --- TAB SWITCHING LOGIC ---
+function changeDay(direction) {
+    // Grab all the tab buttons generated in your HTML
+    const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+    if (tabs.length === 0) return;
+
+    // Find the currently active tab
+    const activeIndex = tabs.findIndex(tab => tab.classList.contains('active'));
+    if (activeIndex === -1) return;
+
+    let targetIndex = activeIndex;
+
+    // Determine the next index safely
+    if (direction === 'next' && activeIndex < tabs.length - 1) {
+        targetIndex = activeIndex + 1;
+    } else if (direction === 'prev' && activeIndex > 0) {
+        targetIndex = activeIndex - 1;
+    }
+
+    // If a new tab is selected, trigger its click event and scroll to it
+    if (targetIndex !== activeIndex) {
+        tabs[targetIndex].click();
+
+        // Smoothly center the newly selected tab in the top ribbon
+        tabs[targetIndex].scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+        });
+    }
 }
