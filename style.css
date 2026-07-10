@@ -169,3 +169,76 @@ body {
     margin-top: 40px;
     font-weight: 500;
 }
+
+/* =========================================
+   5. THEME TOGGLE BUTTON
+   ========================================= */
+#top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Allows absolute positioning of the button */
+}
+
+#theme-toggle {
+    position: absolute;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#theme-toggle:active {
+    transform: scale(0.8);
+}
+
+/* =========================================
+   6. DARK MODE OVERRIDES
+   ========================================= */
+body.dark-theme {
+    background-color: #121212;
+    color: #E0E0E0;
+}
+
+/* Darken the ribbon */
+body.dark-theme .scrollable-tabs {
+    background: #1E1E1E;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+body.dark-theme .tab-btn {
+    color: #888;
+}
+
+body.dark-theme .tab-btn.active {
+    background: rgba(255, 107, 107, 0.15);
+    color: #FF6B6B; /* Soft red for dark mode */
+}
+
+body.dark-theme .tab-btn.active small {
+    color: #FF6B6B;
+}
+
+/* Darken the cards */
+body.dark-theme .meal-section {
+    background: #1E1E1E;
+    border: 1px solid #2A2A2A;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+body.dark-theme .meal-section h3 {
+    color: #FF6B6B;
+    border-bottom: 2px solid #2A2A2A;
+}
+
+body.dark-theme .meal-section li {
+    color: #CCCCCC;
+    border-bottom: 1px dashed #2A2A2A;
+}
+
+body.dark-theme #date-display {
+    color: #AAAAAA;
+}

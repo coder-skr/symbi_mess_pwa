@@ -3,7 +3,8 @@ let menuData = {};
 // Fetch the JSON file when the app loads
 async function fetchMenu() {
     try {
-        const response = await fetch('./menu.json');
+        const response = await fetch('./menu.json?v=' + new Date().getTime());
+
         menuData = await response.json();
         initializeTabs();
     } catch (error) {
@@ -201,3 +202,30 @@ function changeDay(direction) {
         });
     }
 }
+
+/* =========================================
+   DARK MODE LOGIC
+   ========================================= */
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Check local storage for saved theme on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    body.classList.add('dark-theme');
+    themeToggleBtn.textContent = '☀️'; // Change to sun if dark is active
+}
+
+// 2. Listen for clicks on the toggle button
+themeToggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+
+    // 3. Update icon and save preference
+    if (body.classList.contains('dark-theme')) {
+        themeToggleBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        themeToggleBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    }
+});
