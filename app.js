@@ -1,15 +1,32 @@
 let menuData = {};
 
-// Fetch the JSON file when the app loads
 async function fetchMenu() {
-    try {
-        const response = await fetch('./menu.json?v=' + new Date().getTime());
+    // 1. Instantly load from local storage if available
+    const cachedMenu = localStorage.getItem('savedMenuData');
+    if (cachedMenu) {
+        menuData = JSON.parse(cachedMenu);
+        initializeTabs(); // Renders the UI immediately!
+    }
 
-        menuData = await response.json();
-        initializeTabs();
+    try {
+        // 2. Fetch the fresh data in the background
+        const response = await fetch('./menu.json?v=' + new Date().getTime());
+        const freshData = await response.json();
+
+        // 3. Compare old data vs new data
+        if (JSON.stringify(freshData) !== cachedMenu) {
+            menuData = freshData;
+            localStorage.setItem('savedMenuData', JSON.stringify(freshData));
+
+            // Only re-render if the data actually changed or if there was no cache
+            initializeTabs();
+        }
     } catch (error) {
-        document.getElementById('meal-content').innerHTML = '<p style="color:red; text-align:center;">Failed to load menu data.</p>';
-        console.error("Error fetching JSON:", error);
+        // Only show an error if we have no internet AND no cached data
+        if (!cachedMenu) {
+            document.getElementById('meal-content').innerHTML = '<p style="color:red; text-align:center;">Failed to load menu data.</p>';
+        }
+        console.error("Error fetching fresh JSON (using offline data instead):", error);
     }
 }
 
