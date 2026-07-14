@@ -1,0 +1,41 @@
+name: Generate JSON from Menu PDF
+
+# Triggers the action when menu.pdf is updated, or allows you to run it manually
+on:
+  push:
+    paths:
+      - 'menu.pdf'
+  workflow_dispatch:
+
+# Grants the Action permission to push the generated JSON back to your repo
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        # NOTE: Update the libraries below to match whatever you import at the top of your generator.py file!
+        run: |
+          python -m pip install --upgrade pip
+          pip install pdfplumber pandas # <--- Change these if you use PyPDF2, tabula, etc.
+
+      - name: Run JSON Generator
+        run: python generator.py
+
+      - name: Commit and Push menu.json
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add menu.json
+          git commit -m "Auto-generated new menu.json from uploaded menu.pdf" || echo "No changes to commit"
+          git push
